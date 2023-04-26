@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+        <style>
+            img{
+                width: 100%;
+                height: 100%;
+            }
+        </style>
+</head>
+
+<body>
+    <!-- Load TensorFlow.js. This is required to use coco-ssd model. -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"> </script>
+    <!-- Load the coco-ssd model. -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd"> </script>
+    <div class="container" id="first_cont">
+        <h4> capture and detect objects</h4>
+        
+            <!-- <input type="file" name="" onchange="detect_img(event)" accept="image/*" id=""> -->
+            <div class="row">
+                <div class="col col-6">
+                    <!-- <img src="" id="image_upload" alt=""> -->
+                </div>
+                <div class="col-6">
+                    <canvas id="canvas_img"></canvas>
+                </div>
+            </div>
+             
+            <!-- <input type="submit"   value="UPLOAD"> -->
+    </div>
+    <div class="container border-dashed">
+        <video src="" class="rounded" hidden autoplay id="video"></video>
+        <canvas id="canvas" width="800" height="540"></canvas>
+        <button class="btn btn-primary" id="start">Resume video</button>
+        <button class="btn btn-primary" id="pause">Pause video</button>
+        <script src="script.js"></script>
+    </div>
+
+</body>
+
+</html>
