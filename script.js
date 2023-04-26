@@ -1,22 +1,36 @@
 const video = document.getElementById('video')
 function startVideo() {
-  navigator.getUserMedia(
-    { video: {facingMode: {
-      // exact: 'environment'
-    }} },
-    stream => video.srcObject = stream,
-    err => console.error(err)
-  )
+  const isMobile = navigator.userAgentData.mobile; //resolves true/false
+  if(isMobile){
+    navigator.getUserMedia(
+      { video: {facingMode: {
+        exact: 'environment'
+      }} },
+      stream => video.srcObject = stream,
+      err => console.error(err)
+    )
+  }
+  else{
+    navigator.getUserMedia(
+      { video: {facingMode: {
+        // exact: 'environment'
+      }} },
+      stream => video.srcObject = stream,
+      err => console.error(err)
+    )
+  }
+  
 }
 
 let model;
 let ctx = document.getElementById('canvas').getContext("2d");
 const detectFaces = async () => {
   const prediction = await model.detect(video);
-  console.log(prediction);
+  // console.log(prediction);
+  // console.log(ctx)
   if (prediction.length > 0) {
     ctx.beginPath();
-    ctx.drawImage(video, 0, 0, 800, 540);
+    ctx.drawImage(video, 0, 0, 640, 480);
     for (let i = 0; i < prediction.length; i++) {
       ctx.beginPath();
       ctx.rect(prediction[i].bbox[0], prediction[i].bbox[1], prediction[i].bbox[2], prediction[i].bbox[3]);
@@ -25,7 +39,7 @@ const detectFaces = async () => {
       ctx.font = "bold 20px Sans-Serif"
       // ctx.beginPath();
       ctx.fillText("Total objects detected: " + prediction.length, 10, 20);
-      ctx.fillText("→ " + prediction[i].class, prediction[i].bbox[0], prediction[i].bbox[1]-5);
+      ctx.fillText("→ " + prediction[i].class+":"+prediction[i].score, prediction[i].bbox[0], prediction[i].bbox[1]-5);
       ctx.strokeStyle = "#FF0000";
       ctx.fillStyle = "#00ff00"
 
@@ -65,13 +79,13 @@ function detect_img(event){
   
   document.getElementById('image_upload').src=URL.createObjectURL(event.target.files[0]);
   var img=document.getElementById('image_upload').getUserMedia;
-  console.log(event.target.files[0]);
+  // console.log(event.target.files[0]);
   // ImageBitmap img=new ImageBitmap();
   /////////////////////////
   let ctx_img = document.getElementById('canvas_img').getContext("2d");
   const detectFaces = async () => {
     const prediction = await model.detect(img);
-    console.log(prediction);
+    // console.log(prediction);
     if (prediction.length > 0) {
       ctx_img.beginPath();
       ctx_img.drawImage(img, 0, 0, 800, 540);
